@@ -1,8 +1,9 @@
-import { Inject, MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { LoggerMiddleware } from '../middleware/logger/logger.middleware';
+import { HttpExceptionFilter } from '../filter/http-exception.filter';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import { LoggerMiddleware } from '../middleware/logger/logger.middleware';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, { provide: 'APP_FILTER', useClass: HttpExceptionFilter }],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
