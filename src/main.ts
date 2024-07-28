@@ -1,13 +1,14 @@
-import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app.module";
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  const port = process.env.PORT;
+  const app = await NestFactory.create(AppModule, {
+    bufferLogs: true,
+  });
 
-  app.setGlobalPrefix("/api");
+  app.setGlobalPrefix('/api');
   app.enableCors();
 
-  await app.listen(port);
+  await app.listen(process.env.PORT);
 }
 bootstrap();
