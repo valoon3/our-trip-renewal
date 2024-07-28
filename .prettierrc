@@ -6,6 +6,5 @@
   "tabWidth": 2,
   "Semicolons": true,
   "Quotes": true,
-  "Trailing Commas": "es5",
-  "arrowParens": true
+  "Trailing Commas": "es5"
 }
